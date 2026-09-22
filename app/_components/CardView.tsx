@@ -1,6 +1,7 @@
 import { Person } from "@/app/_config/card";
 import { publicAssetOrNull } from "@/app/_lib/preload";
 import { AppBar } from "@/app/_components/AppBar";
+import { ComplianceCard } from "@/app/_components/ComplianceCard";
 import { CorporateIdentity } from "@/app/_components/CorporateIdentity";
 import { HeroReveal } from "@/app/_components/HeroReveal";
 import { LegalFooter } from "@/app/_components/LegalFooter";
@@ -27,6 +28,7 @@ export function CardView({ person }: CardViewProps) {
     <ProfileCard key="profile" person={person} portraitSrc={portraitSrc} />,
     <SaveContactButton key="contact" person={person} />,
     <WebsiteQrCard key="website-qr" />,
+    <ComplianceCard key="compliance" />,
     <LegalFooter key="legal" />,
   ];
 

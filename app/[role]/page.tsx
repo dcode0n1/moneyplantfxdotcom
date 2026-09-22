@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { card, profiles } from "@/app/_config/card";
+import { profiles } from "@/app/_config/card";
 import { CardView } from "@/app/_components/CardView";
+import { buildPersonMetadata } from "@/app/_lib/metadata";
 
 interface RolePageProps {
   params: Promise<{ role: string }>;
@@ -20,21 +21,7 @@ export async function generateMetadata({ params }: RolePageProps): Promise<Metad
   const person = profiles[role.toLowerCase()];
   if (!person) return {};
 
-  const title = `${person.name} — ${person.title} | Digital Executive Card`;
-  const description = `${card.brand.name} Digital Executive Card for ${person.name}, ${person.title}.`;
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-    },
-    twitter: {
-      title,
-      description,
-    },
-  };
+  return buildPersonMetadata(person, `/${role.toLowerCase()}`);
 }
 
 export default async function RolePage({ params }: RolePageProps) {

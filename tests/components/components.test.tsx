@@ -190,3 +190,17 @@ describe("SaveContactButton", () => {
     expect(link).toHaveAttribute("type", "text/vcard");
   });
 });
+
+describe("ComplianceCard", () => {
+  it("renders CMA Category 1 and Category 5 regulatory compliance disclosures", async () => {
+    const { ComplianceCard } = await import("@/app/_components/ComplianceCard");
+    render(<ComplianceCard />);
+    expect(screen.getByRole("heading", { name: /regulatory compliance/i })).toBeInTheDocument();
+    expect(screen.getByText("CMA CAT 1 & 5")).toBeInTheDocument();
+    expect(screen.getByText(/MoneyplantFX is CMA Category 1 and CMA Category 5 Compliant/i)).toBeInTheDocument();
+    expect(screen.getByText("CMA Category 1 Compliant")).toBeInTheDocument();
+    expect(screen.getByText("CMA Category 5 Compliant")).toBeInTheDocument();
+    expect(screen.getByText(/authorized with a full brokerage license/i)).toBeInTheDocument();
+    expect(screen.getByText(/restricted from directly holding customer funds/i)).toBeInTheDocument();
+  });
+});

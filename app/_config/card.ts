@@ -18,6 +18,7 @@ export interface Person {
   portrait: string;
   portraitPosition?: string;
   portraitAlt: string;
+  ogImage?: string;
   telegram: string;
   telegramUrl: string;
   vcard: string;
@@ -36,6 +37,7 @@ export const profiles: Record<string, Person> = {
     portrait: "/img/harsh-agarwal.png",
     portraitPosition: "center",
     portraitAlt: "Portrait of Harsh Agarwal, CEO of MoneyplantFX",
+    ogImage: "/harsh-og.png",
     telegram,
     telegramUrl: `https://t.me/${telegram}`,
     vcard: "/harsh-agarwal.vcf",
@@ -52,6 +54,7 @@ export const profiles: Record<string, Person> = {
     portrait: "/img/mariia-moroz.jpg",
     portraitPosition: "50% 25%",
     portraitAlt: "Portrait of Mariia Moroz, Head of Marketing of MoneyplantFX",
+    ogImage: "/maria-og.png",
     telegram,
     telegramUrl: `https://t.me/${telegram}`,
     vcard: "/mariia-moroz.vcf",
@@ -75,12 +78,12 @@ export const card = {
         : "https://moneyplantfx.com"),
     title: "MoneyplantFX | Digital Executive Card",
     description:
-      "MoneyplantFX Digital Executive Card — trade with zero brokerage, download the platform, access client portal and instant demo account.",
+      "MoneyplantFX Digital Executive Card — CMA Category 1 & Category 5 compliant institutional trading platform. Trade with zero brokerage, download the platform, access client portal and instant demo account.",
     ogImage: "/moneyplantfx-og.png",
-    ogImageAlt: "MoneyplantFX — Zero Brokerage Trading Platform",
+    ogImageAlt: "MoneyplantFX — CMA 1 & 5 Compliant Zero Brokerage Trading Platform",
     appName: "MoneyplantFX Digital Card",
     shortName: "MoneyplantFX",
-    manifestDescription: "MoneyplantFX Digital Executive Card",
+    manifestDescription: "MoneyplantFX Digital Executive Card — CMA 1 & CMA 5 Compliant",
   },
 
   icons: {
@@ -98,12 +101,34 @@ export const card = {
   brand: {
     name: "MoneyplantFX",
     tagline: "Zero Brokerage Trading Platform",
+    compliancePill: "CMA 1 & CMA 5 COMPLIANT",
     websiteUrl: "https://moneyplantfx.com/",
     logo: "/MoneyplantFX/android-chrome-192x192.png",
     logoAlt: "MoneyplantFX",
     statusLabel: "MPFX NODES ACTIVE",
     appBarTitle: "Digital Card",
     notificationsLabel: "Notifications (coming soon)",
+  },
+
+  compliance: {
+    badge: "CMA CAT 1 & 5",
+    title: "Regulatory Compliance",
+    heading: "CMA Category 1 & Category 5 Compliant",
+    summary: "MoneyplantFX is CMA Category 1 and CMA Category 5 Compliant.",
+    categories: [
+      {
+        name: "CMA Category 1 Compliant",
+        subtitle: "Full Brokerage Authorization",
+        description:
+          "A firm authorized with a full brokerage license. This allows the entity to execute trades directly and securely hold client funds.",
+      },
+      {
+        name: "CMA Category 5 Compliant",
+        subtitle: "Marketing & Financial Introduction Authorization",
+        description:
+          "A firm that only holds a legal marketing and introduction authorization. They can provide financial advice and arrange deals, but they are restricted from directly holding customer funds or processing trades.",
+      },
+    ],
   },
 
   intro: {
@@ -227,7 +252,7 @@ export const card = {
   },
 
   legal:
-    "© MoneyplantFX • INSTITUTIONAL GRADE — High-performance liquidity & institutional trading infrastructure.",
+    "© MoneyplantFX • CMA Category 1 & Category 5 Compliant. Category 1: Full brokerage license to execute trades directly and hold client funds. Category 5: Legal marketing and introduction authorization to provide advice and arrange deals (restricted from holding customer funds or processing trades). High-performance liquidity & institutional trading infrastructure.",
 } as const;
 
 export type Card = typeof card;
