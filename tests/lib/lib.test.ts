@@ -75,10 +75,16 @@ describe("vCard", () => {
     expect(file).toBe(buildVCard(profiles["head-of-marketing"]));
   });
 
-  it("contains no invented contact details", () => {
-    const vcf = buildVCard(profiles.ceo);
-    expect(vcf).not.toMatch(/^(TEL|EMAIL)/m);
-    expect(vcf).toContain("FN:Harsh Agarwal");
+  it("contains verified contact details for CEO and Head of Marketing", () => {
+    const ceoVcf = buildVCard(profiles.ceo);
+    expect(ceoVcf).toContain("FN:Harsh Agarwal");
+    expect(ceoVcf).toContain("EMAIL;TYPE=INTERNET,PREF:harsh@harshgroups.com");
+    expect(ceoVcf).toContain("TEL;TYPE=CELL,PREF:+971501424308");
+
+    const marketingVcf = buildVCard(profiles["head-of-marketing"]);
+    expect(marketingVcf).toContain("FN:Mariia Moroz");
+    expect(marketingVcf).toContain("TEL;TYPE=CELL,PREF:+971503794342");
+    expect(marketingVcf).not.toMatch(/^EMAIL/m);
   });
 });
 

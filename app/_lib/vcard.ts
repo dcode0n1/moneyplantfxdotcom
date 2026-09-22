@@ -3,6 +3,8 @@ interface VCardPerson {
   role: string;
   organization: string;
   url?: string;
+  email?: string;
+  phone?: string;
 }
 
 function escape(value: string): string {
@@ -16,15 +18,25 @@ function escape(value: string): string {
  * Builds the vCard 3.0 text for an executive.
  */
 export function buildVCard(person: VCardPerson): string {
-  return [
+  const lines = [
     "BEGIN:VCARD",
     "VERSION:3.0",
     `N:;${escape(person.name)};;;`,
     `FN:${escape(person.name)}`,
     `ORG:${escape(person.organization)}`,
     `TITLE:${escape(person.role)}`,
-    `URL:${person.url || "https://moneyplantfx.com/"}`,
-    "END:VCARD",
-    "",
-  ].join("\r\n");
+  ];
+
+  if (person.email) {
+    lines.push(`EMAIL;TYPE=INTERNET,PREF:${escape(person.email)}`);
+  }
+  if (person.phone) {
+    lines.push(`TEL;TYPE=CELL,PREF:${escape(person.phone)}`);
+  }
+
+  lines.push(`URL:${person.url || "https://moneyplantfx.com/"}`);
+  lines.push("END:VCARD");
+  lines.push("");
+
+  return lines.join("\r\n");
 }

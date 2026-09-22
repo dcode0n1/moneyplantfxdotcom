@@ -204,3 +204,55 @@ describe("ComplianceCard", () => {
     expect(screen.getByText(/restricted from directly holding customer funds/i)).toBeInTheDocument();
   });
 });
+
+describe("DirectContactCard", () => {
+  it("renders CEO direct line, email, call action, and WhatsApp link", async () => {
+    const { DirectContactCard } = await import("@/app/_components/DirectContactCard");
+    const { ToastProvider } = await import("@/app/_components/Toast");
+    render(
+      <ToastProvider>
+        <DirectContactCard person={profiles.ceo} />
+      </ToastProvider>,
+    );
+    expect(screen.getByText("+971 50 142 4308")).toBeInTheDocument();
+    expect(screen.getByText("harsh@harshgroups.com")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Call Harsh Agarwal/i })).toHaveAttribute(
+      "href",
+      "tel:+971501424308",
+    );
+    expect(screen.getByRole("link", { name: /Send email to Harsh Agarwal/i })).toHaveAttribute(
+      "href",
+      "mailto:harsh@harshgroups.com",
+    );
+    expect(screen.getByRole("link", { name: /WhatsApp/i })).toHaveAttribute(
+      "href",
+      "https://wa.me/971501424308",
+    );
+  });
+
+  it("renders Head of Marketing direct line and WhatsApp link", async () => {
+    const { DirectContactCard } = await import("@/app/_components/DirectContactCard");
+    const { ToastProvider } = await import("@/app/_components/Toast");
+    render(
+      <ToastProvider>
+        <DirectContactCard person={profiles["head-of-marketing"]} />
+      </ToastProvider>,
+    );
+    expect(screen.getByText("+971 50 379 4342")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Call Mariia Moroz/i })).toHaveAttribute(
+      "href",
+      "tel:+971503794342",
+    );
+    expect(screen.getByRole("link", { name: /WhatsApp/i })).toHaveAttribute(
+      "href",
+      "https://wa.me/971503794342",
+    );
+  });
+
+  it("returns null when executive has neither phone nor email", async () => {
+    const { DirectContactCard } = await import("@/app/_components/DirectContactCard");
+    const emptyPerson = { ...profiles.ceo, phone: undefined, email: undefined };
+    const { container } = render(<DirectContactCard person={emptyPerson} />);
+    expect(container.firstChild).toBeNull();
+  });
+});

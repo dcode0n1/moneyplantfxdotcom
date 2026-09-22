@@ -19,6 +19,9 @@ export interface Person {
   portraitPosition?: string;
   portraitAlt: string;
   ogImage?: string;
+  email?: string;
+  phone?: string;
+  phoneFormatted?: string;
   telegram: string;
   telegramUrl: string;
   vcard: string;
@@ -38,6 +41,9 @@ export const profiles: Record<string, Person> = {
     portraitPosition: "center",
     portraitAlt: "Portrait of Harsh Agarwal, CEO of MoneyplantFX",
     ogImage: "/harsh-og.png",
+    email: "harsh@harshgroups.com",
+    phone: "+971501424308",
+    phoneFormatted: "+971 50 142 4308",
     telegram,
     telegramUrl: `https://t.me/${telegram}`,
     vcard: "/harsh-agarwal.vcf",
@@ -55,6 +61,8 @@ export const profiles: Record<string, Person> = {
     portraitPosition: "50% 25%",
     portraitAlt: "Portrait of Mariia Moroz, Head of Marketing of MoneyplantFX",
     ogImage: "/maria-og.png",
+    phone: "+971503794342",
+    phoneFormatted: "+971 50 379 4342",
     telegram,
     telegramUrl: `https://t.me/${telegram}`,
     vcard: "/mariia-moroz.vcf",
