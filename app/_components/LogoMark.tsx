@@ -3,7 +3,7 @@ interface LogoMarkProps {
   title?: string;
 }
 
-/** 9xTechnology mark (inline SVG with clip-path so the preloader handoff can target the <svg>). */
+/** MoneyplantFX mark (inline SVG with clip-path so the preloader handoff can target the <svg>). */
 export function LogoMark({ className, title }: LogoMarkProps) {
   return (
     <svg
@@ -19,7 +19,7 @@ export function LogoMark({ className, title }: LogoMarkProps) {
       </clipPath>
       <g clipPath="url(#logo-rounded)">
         <image
-          href="/9xTechnology/android-chrome-192x192.png"
+          href="/MoneyplantFX/android-chrome-192x192.png"
           width="192"
           height="192"
           preserveAspectRatio="xMidYMid slice"

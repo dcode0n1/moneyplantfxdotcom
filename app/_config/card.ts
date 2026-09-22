@@ -8,6 +8,63 @@
 
 const telegram = "adamken0007";
 
+export interface Person {
+  slug: string;
+  name: string;
+  title: string;
+  role: string;
+  organization: string;
+  initials: string;
+  portrait: string;
+  portraitPosition?: string;
+  portraitAlt: string;
+  telegram: string;
+  telegramUrl: string;
+  vcard: string;
+  filename: string;
+  mime: string;
+}
+
+export const profiles: Record<string, Person> = {
+  ceo: {
+    slug: "ceo",
+    name: "Harsh Agarwal",
+    title: "CEO @ MoneyplantFX",
+    role: "CEO",
+    organization: "MoneyplantFX",
+    initials: "HA",
+    portrait: "/MoneyplantFX/android-chrome-512x512.png",
+    portraitPosition: "center",
+    portraitAlt: "Harsh Agarwal, CEO of MoneyplantFX",
+    telegram,
+    telegramUrl: `https://t.me/${telegram}`,
+    vcard: "/harsh-agarwal.vcf",
+    filename: "Harsh-Agarwal-MoneyplantFX.vcf",
+    mime: "text/vcard",
+  },
+  "head-of-marketing": {
+    slug: "head-of-marketing",
+    name: "Mariia Moroz",
+    title: "Head of Marketing @ MoneyplantFX",
+    role: "Head of Marketing",
+    organization: "MoneyplantFX",
+    initials: "MM",
+    portrait: "/img/mariia-moroz.jpg",
+    portraitPosition: "50% 25%",
+    portraitAlt: "Portrait of Mariia Moroz, Head of Marketing of MoneyplantFX",
+    telegram,
+    telegramUrl: `https://t.me/${telegram}`,
+    vcard: "/mariia-moroz.vcf",
+    filename: "Mariia-Moroz-MoneyplantFX.vcf",
+    mime: "text/vcard",
+  },
+};
+
+// Friendly alias for marketing role
+profiles["marketing"] = profiles["head-of-marketing"];
+
+export const defaultProfile = profiles.ceo;
+
 export const card = {
   site: {
     // Canonical/OG base URL comes from deployment config, never hard-coded.
@@ -15,52 +72,43 @@ export const card = {
       process.env.NEXT_PUBLIC_SITE_URL ??
       (process.env.VERCEL_PROJECT_PRODUCTION_URL
         ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-        : ""),
-    title: "Hemant — CTO @ 9xTechnology | Digital Executive Card",
+        : "https://moneyplantfx.com"),
+    title: "MoneyplantFX | Digital Executive Card",
     description:
-      "9xTechnology Digital Executive Card — contact Hemant, download the trading app, open the client portal and try an instant demo account.",
-    ogImage: "/9xtechnology-og.png",
-    ogImageAlt: "9xTechnology — Trading Infrastructure",
-    appName: "9xTechnology Digital Card",
-    shortName: "9xTechnology",
-    manifestDescription: "9xTechnology Digital Executive Card",
+      "MoneyplantFX Digital Executive Card — trade with zero brokerage, download the platform, access client portal and instant demo account.",
+    ogImage: "/moneyplantfx-og.png",
+    ogImageAlt: "MoneyplantFX — Zero Brokerage Trading Platform",
+    appName: "MoneyplantFX Digital Card",
+    shortName: "MoneyplantFX",
+    manifestDescription: "MoneyplantFX Digital Executive Card",
   },
 
   icons: {
-    favicon: "/9xTechnology/favicon.ico",
-    favicon16: "/9xTechnology/favicon-16x16.png",
-    favicon32: "/9xTechnology/favicon-32x32.png",
-    appleTouch: "/9xTechnology/apple-touch-icon.png",
-    android192: "/9xTechnology/android-chrome-192x192.png",
-    android512: "/9xTechnology/android-chrome-512x512.png",
+    favicon: "/MoneyplantFX/favicon.ico",
+    favicon16: "/MoneyplantFX/favicon-16x16.png",
+    favicon32: "/MoneyplantFX/favicon-32x32.png",
+    appleTouch: "/MoneyplantFX/apple-touch-icon.png",
+    android192: "/MoneyplantFX/android-chrome-192x192.png",
+    android512: "/MoneyplantFX/android-chrome-512x512.png",
   },
 
-  person: {
-    name: "Hemant",
-    title: "CTO @ 9xTechnology",
-    role: "CTO",
-    organization: "9xTechnology",
-    initials: "H",
-    portrait: "/img/HemantPhoto.png",
-    portraitPosition: "70% 30%",
-    portraitAlt: "Portrait of Hemant, CTO of 9xTechnology",
-    telegram,
-    telegramUrl: `https://t.me/${telegram}`,
-  },
+  person: defaultProfile,
+  profiles,
 
   brand: {
-    name: "9xTechnology",
-    tagline: "Trading Infrastructure",
-    logo: "/9xTechnology/android-chrome-192x192.png",
-    logoAlt: "9xTechnology",
-    statusLabel: "9X NODES ACTIVE",
+    name: "MoneyplantFX",
+    tagline: "Zero Brokerage Trading Platform",
+    websiteUrl: "https://moneyplantfx.com/",
+    logo: "/MoneyplantFX/android-chrome-192x192.png",
+    logoAlt: "MoneyplantFX",
+    statusLabel: "MPFX NODES ACTIVE",
     appBarTitle: "Digital Card",
     notificationsLabel: "Notifications (coming soon)",
   },
 
   intro: {
-    brand: "9X TECHNOLOGY",
-    tagline: "TRADING INFRASTRUCTURE",
+    brand: "MONEYPLANT FX",
+    tagline: "ZERO BROKERAGE TRADING",
     access: "INSTITUTIONAL ACCESS",
     motto: "PRECISION. LIQUIDITY. EXECUTION.",
     steps: ["INITIALIZING", "LOADING CARD", "READY"],
@@ -77,18 +125,18 @@ export const card = {
   apps: {
     heading: "Trading App",
     version: "v4.2 PRO",
-    subtitle: "Download the trading app",
+    subtitle: "Download the trading platform",
     ios: {
       store: "App Store",
       badgeTop: "Download on the",
-      url: "https://apps.apple.com/us/app/global-apex-markets/id6773324199",
-      qrLabel: "QR code for downloading the 9xTechnology iOS application",
+      url: "https://moneyplantfx.com/",
+      qrLabel: "QR code for MoneyplantFX",
     },
     android: {
       store: "Google Play",
       badgeTop: "Get it on",
-      url: "https://play.google.com/store/apps/details?id=com.ninextechnology.globalapexmarkets",
-      qrLabel: "QR code for downloading the 9xTechnology Android application",
+      url: "https://moneyplantfx.com/",
+      qrLabel: "QR code for MoneyplantFX",
     },
   },
 
@@ -98,7 +146,7 @@ export const card = {
       copy: "Manage your trading account, multi-currency wallets, and instant withdrawals.",
       cta: "Open Portal",
       url: "https://wallet.fxcapital24.com",
-      qrLabel: "QR code for opening the 9xTechnology Client Portal",
+      qrLabel: "QR code for opening the MoneyplantFX Client Portal",
       demoCredentials: {
         tag: "DEMO ACCESS",
         email: {
@@ -120,7 +168,7 @@ export const card = {
       cta: "Open Dashboard",
       badge: "RESTRICTED",
       url: "https://admin.fxcapital24.com",
-      qrLabel: "QR code for opening the 9xTechnology Admin Dashboard login",
+      qrLabel: "QR code for opening the MoneyplantFX Admin Dashboard login",
       demoCredentials: {
         tag: "DEMO ACCESS",
         email: {
@@ -142,8 +190,8 @@ export const card = {
     tag: "LIVE INSTANT ACCESS",
     accountId: "77777",
     password: process.env.NEXT_PUBLIC_DEMO_PASSWORD ?? "Test@12345",
-    passwordUnavailable: "Request from CTO",
-    server: "9xTechnology-Demo01",
+    passwordUnavailable: "Request from Executive",
+    server: "MoneyplantFX-Demo01",
     labels: {
       accountId: "Account ID",
       password: "Password",
@@ -160,13 +208,13 @@ export const card = {
 
   contact: {
     cta: "Save Contact",
-    vcard: "/hemant.vcf",
-    filename: "Hemant-9xTechnology.vcf",
+    vcard: defaultProfile.vcard,
+    filename: defaultProfile.filename,
     mime: "text/vcard",
   },
 
   install: {
-    cta: "Install 9xTechnology",
+    cta: "Install MoneyplantFX",
     iosHint: "On iPhone: tap Share, then “Add to Home Screen”.",
   },
 
@@ -179,7 +227,7 @@ export const card = {
   },
 
   legal:
-    "© 9xTechnology • INSTITUTIONAL GRADE — High-performance liquidity & institutional trading infrastructure.",
+    "© MoneyplantFX • INSTITUTIONAL GRADE — High-performance liquidity & institutional trading infrastructure.",
 } as const;
 
 export type Card = typeof card;

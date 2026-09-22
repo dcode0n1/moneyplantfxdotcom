@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/hemant.vcf",
+        source: "/:path*.vcf",
         headers: [{ key: "Content-Type", value: "text/vcard; charset=utf-8" }],
       },
     ];

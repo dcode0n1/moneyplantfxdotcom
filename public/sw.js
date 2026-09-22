@@ -1,22 +1,23 @@
-/* 9xTechnology Digital Card — offline shell service worker (Phase 1, static).
+/* MoneyplantFX Digital Card — offline shell service worker (Phase 1, static).
  * Caches only public static assets. Never caches cross-origin requests,
  * API/auth responses or anything non-GET. Bump VERSION to invalidate. */
-const VERSION = "9x-v1";
+const VERSION = "mpfx-v1";
 const SHELL_CACHE = `${VERSION}-shell`;
 const ASSET_CACHE = `${VERSION}-assets`;
 
 const SHELL_URLS = [
   "/",
   "/manifest.webmanifest",
-  "/hemant.vcf",
-  "/9xTechnology/android-chrome-192x192.png",
-  "/9xTechnology/android-chrome-512x512.png",
-  "/9xTechnology/apple-touch-icon.png",
-  "/9xTechnology/favicon-32x32.png",
-  "/9xtechnology-og.png",
+  "/harsh-agarwal.vcf",
+  "/mariia-moroz.vcf",
+  "/MoneyplantFX/android-chrome-192x192.png",
+  "/MoneyplantFX/android-chrome-512x512.png",
+  "/MoneyplantFX/apple-touch-icon.png",
+  "/MoneyplantFX/favicon-32x32.png",
+  "/moneyplantfx-og.png",
 ];
 
-const STATIC_PREFIXES = ["/_next/static/", "/9xTechnology/", "/img/"];
+const STATIC_PREFIXES = ["/_next/static/", "/MoneyplantFX/", "/img/"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

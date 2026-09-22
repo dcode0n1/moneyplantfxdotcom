@@ -1,14 +1,18 @@
 "use client";
 
 import { Send } from "lucide-react";
-import { card } from "@/app/_config/card";
+import { card, Person } from "@/app/_config/card";
 import { useClipboard } from "@/app/_hooks/useClipboard";
 import { CopyButton } from "./CopyButton";
 import { ExternalAction } from "./ExternalAction";
 import { SurfaceCard } from "./SurfaceCard";
 
-export function TelegramCard() {
-  const { person, telegramCard } = card;
+interface TelegramCardProps {
+  person?: Person;
+}
+
+export function TelegramCard({ person = card.person }: TelegramCardProps) {
+  const { telegramCard } = card;
   const { copy, isCopied } = useClipboard();
   const handle = `@${person.telegram}`;
 

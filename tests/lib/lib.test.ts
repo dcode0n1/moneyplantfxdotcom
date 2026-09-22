@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it, vi } from "vitest";
-import { card } from "@/app/_config/card";
+import { card, profiles } from "@/app/_config/card";
 import { copyText } from "@/app/_lib/clipboard";
 import { formatCredentials } from "@/app/_lib/credentials";
 import { resolvePublicUrl } from "@/app/_lib/url";
@@ -52,8 +52,8 @@ describe("copyText", () => {
 
 describe("formatCredentials", () => {
   it("formats the full payload", () => {
-    expect(formatCredentials({ accountId: "21777", password: "secret", server: "9xTechnology-Demo01" })).toBe(
-      "Account: 21777\nPassword: secret\nServer: 9xTechnology-Demo01",
+    expect(formatCredentials({ accountId: "21777", password: "secret", server: "MoneyplantFX-Demo01" })).toBe(
+      "Account: 21777\nPassword: secret\nServer: MoneyplantFX-Demo01",
     );
   });
 
@@ -65,15 +65,20 @@ describe("formatCredentials", () => {
 });
 
 describe("vCard", () => {
-  it("public/hemant.vcf matches the card config", () => {
-    const file = readFileSync("public/hemant.vcf", "utf8");
-    expect(file).toBe(buildVCard(card.person));
+  it("public/harsh-agarwal.vcf matches the CEO card config", () => {
+    const file = readFileSync("public/harsh-agarwal.vcf", "utf8");
+    expect(file).toBe(buildVCard(profiles.ceo));
+  });
+
+  it("public/mariia-moroz.vcf matches the Head of Marketing card config", () => {
+    const file = readFileSync("public/mariia-moroz.vcf", "utf8");
+    expect(file).toBe(buildVCard(profiles["head-of-marketing"]));
   });
 
   it("contains no invented contact details", () => {
-    const vcf = buildVCard(card.person);
+    const vcf = buildVCard(profiles.ceo);
     expect(vcf).not.toMatch(/^(TEL|EMAIL)/m);
-    expect(vcf).toContain("FN:Hemant");
+    expect(vcf).toContain("FN:Harsh Agarwal");
   });
 });
 
@@ -93,5 +98,10 @@ describe("card config", () => {
       expect(url === "" || resolvePublicUrl(url) !== null).toBe(true);
       expect(url).not.toBe("#");
     }
+  });
+
+  it("redirects trading app QR to moneyplantfx.com", () => {
+    expect(card.apps.ios.url).toBe("https://moneyplantfx.com/");
+    expect(card.apps.android.url).toBe("https://moneyplantfx.com/");
   });
 });

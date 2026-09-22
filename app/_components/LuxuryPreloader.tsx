@@ -22,7 +22,7 @@ export const REVEAL_MS = 1000;
 export const SAFETY_MARGIN_MS = 1500;
 
 /**
- * 9xTechnology cinematic intro: telemetry count → UI fade → curtain reveal while the
+ * MoneyplantFX cinematic intro: telemetry count → UI fade → curtain reveal while the
  * logo flies into the AppBar (#header-brand-logo-mark) → card revealed.
  * The Digital Card is rendered behind it from the first byte; this only
  * choreographs the reveal and can never trap the user (safety timeout).

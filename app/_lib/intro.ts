@@ -1,4 +1,4 @@
-export const INTRO_SESSION_KEY = "9x_intro_seen";
+export const INTRO_SESSION_KEY = "mpfx_intro_seen";
 
 /** Class on <html> while the cinematic intro plays (hides AppBar logo, locks scroll). */
 export const INTRO_ACTIVE_CLASS = "lux-active";

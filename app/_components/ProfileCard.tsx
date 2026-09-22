@@ -1,14 +1,16 @@
 import Image from "next/image";
-import { card } from "@/app/_config/card";
+import { card, Person } from "@/app/_config/card";
 import { SurfaceCard } from "./SurfaceCard";
 
 interface ProfileCardProps {
   /** Resolved server-side; null when the portrait asset is not deployed yet. */
   portraitSrc: string | null;
+  person?: Person;
 }
 
-export function ProfileCard({ portraitSrc }: ProfileCardProps) {
-  const { person } = card;
+export function ProfileCard({ portraitSrc, person = card.person }: ProfileCardProps) {
+  const isCompanyLogo = person.portrait.includes("MoneyplantFX") || person.portrait.includes("android-chrome");
+
   return (
     <SurfaceCard labelledBy="profile-name" className="relative overflow-hidden text-center">
       <div
@@ -28,7 +30,7 @@ export function ProfileCard({ portraitSrc }: ProfileCardProps) {
               preload
               loading="eager"
               fetchPriority="high"
-              className="size-full object-cover"
+              className={`size-full ${isCompanyLogo ? "object-contain p-3.5 bg-canvas" : "object-cover"}`}
               style={{ objectPosition: person.portraitPosition ?? "center" }}
             />
           ) : (

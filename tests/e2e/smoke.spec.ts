@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 const WIDTHS = [360, 370, 390, 414, 430];
 
-test("first session: intro → logo flight → card → copy → vCard", async ({ page }) => {
+test("first session: intro → logo flight → card → website QR → vCard", async ({ page }) => {
   await page.goto("/");
 
   // Preloader appears on first session, then the curtains open.
@@ -18,25 +18,41 @@ test("first session: intro → logo flight → card → copy → vCard", async (
   await expect(page.locator("html")).not.toHaveClass(/lux-active/);
   await expect(page.locator("#header-brand-logo-mark svg")).toHaveCSS("opacity", "1");
 
-  // Digital Card is visible.
-  await expect(page.getByRole("heading", { name: "Hemant" })).toBeVisible();
-  await expect(page.getByText("CTO @ 9xTechnology")).toBeVisible();
+  // Digital Card is visible with default executive (CEO).
+  await expect(page.getByRole("heading", { name: "Harsh Agarwal" })).toBeVisible();
+  await expect(page.getByText("CEO @ MoneyplantFX")).toBeVisible();
 
-  // Copy credentials → toast.
-  await page.getByRole("button", { name: "Copy credentials" }).click();
-  await expect(page.getByRole("status").filter({ hasText: "Credentials copied" })).toBeVisible();
-  const clipboard = await page.evaluate(() => navigator.clipboard.readText());
-  // Windows clipboards store CRLF.
-  expect(clipboard.replace(/\r\n/g, "\n")).toBe(
-    "Account: 77777\nPassword: e2e-demo-pass\nServer: 9xTechnology-Demo01",
-  );
+
+
+  // Website QR card is visible with link to moneyplantfx.com.
+  const websiteLink = page.getByRole("link", { name: /Visit moneyplantfx.com/i });
+  await expect(websiteLink).toBeVisible();
+  await expect(websiteLink).toHaveAttribute("href", "https://moneyplantfx.com/");
 
   // vCard download attributes.
   const save = page.getByRole("link", { name: "Save Contact" });
-  await expect(save).toHaveAttribute("download", "Hemant-9xTechnology.vcf");
-  await expect(save).toHaveAttribute("href", "/hemant.vcf");
-  const vcf = await page.request.get("/hemant.vcf");
+  await expect(save).toHaveAttribute("download", "Harsh-Agarwal-MoneyplantFX.vcf");
+  await expect(save).toHaveAttribute("href", "/harsh-agarwal.vcf");
+  const vcf = await page.request.get("/harsh-agarwal.vcf");
   expect(vcf.headers()["content-type"]).toContain("text/vcard");
+});
+
+test("role slug navigation: /head-of-marketing shows Mariia Moroz", async ({ page }) => {
+  await page.goto("/head-of-marketing?intro=0");
+  await expect(page.getByRole("heading", { name: "Mariia Moroz" })).toBeVisible();
+  await expect(page.getByText("Head of Marketing @ MoneyplantFX")).toBeVisible();
+
+  const save = page.getByRole("link", { name: "Save Contact" });
+  await expect(save).toHaveAttribute("download", "Mariia-Moroz-MoneyplantFX.vcf");
+  await expect(save).toHaveAttribute("href", "/mariia-moroz.vcf");
+});
+
+test("role slug navigation: /ceo shows Harsh Agarwal with company logo", async ({ page }) => {
+  await page.goto("/ceo?intro=0");
+  await expect(page.getByRole("heading", { name: "Harsh Agarwal" })).toBeVisible();
+  await expect(page.getByText("CEO @ MoneyplantFX")).toBeVisible();
+  const img = page.locator("img[alt='Harsh Agarwal, CEO of MoneyplantFX']");
+  await expect(img).toBeVisible();
 });
 
 test("intro is skipped on repeat visits in the same session", async ({ page }) => {
@@ -60,7 +76,7 @@ test.describe("reduced motion", () => {
   test("skips the cinematic intro and reveals immediately", async ({ page }) => {
     await page.goto("/");
     await expect(page.locator(".lux-preloader")).toHaveCount(0);
-    await expect(page.getByRole("heading", { name: "Hemant" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Harsh Agarwal" })).toBeVisible();
   });
 });
 
