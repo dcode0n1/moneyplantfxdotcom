@@ -2,8 +2,7 @@ interface VCardPerson {
   name: string;
   role: string;
   organization: string;
-  telegram: string;
-  telegramUrl: string;
+  url?: string;
 }
 
 function escape(value: string): string {
@@ -14,9 +13,7 @@ function escape(value: string): string {
 }
 
 /**
- * Builds the vCard 3.0 text for a person. Phase 1 ships the result as the
- * static `public/hemant.vcf`; a test keeps that file in sync with config.
- * Phase 2 can serve this from `/api/vcard` without changing callers.
+ * Builds the vCard 3.0 text for an executive.
  */
 export function buildVCard(person: VCardPerson): string {
   return [
@@ -26,9 +23,7 @@ export function buildVCard(person: VCardPerson): string {
     `FN:${escape(person.name)}`,
     `ORG:${escape(person.organization)}`,
     `TITLE:${escape(person.role)}`,
-    `URL:${person.telegramUrl}`,
-    `X-SOCIALPROFILE;TYPE=telegram:${person.telegramUrl}`,
-    `NOTE:Telegram @${escape(person.telegram)}`,
+    `URL:${person.url || "https://moneyplantfx.com/"}`,
     "END:VCARD",
     "",
   ].join("\r\n");

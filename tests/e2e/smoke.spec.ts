@@ -47,11 +47,11 @@ test("role slug navigation: /head-of-marketing shows Mariia Moroz", async ({ pag
   await expect(save).toHaveAttribute("href", "/mariia-moroz.vcf");
 });
 
-test("role slug navigation: /ceo shows Harsh Agarwal with company logo", async ({ page }) => {
+test("role slug navigation: /ceo shows Harsh Agarwal with portrait", async ({ page }) => {
   await page.goto("/ceo?intro=0");
   await expect(page.getByRole("heading", { name: "Harsh Agarwal" })).toBeVisible();
   await expect(page.getByText("CEO @ MoneyplantFX")).toBeVisible();
-  const img = page.locator("img[alt='Harsh Agarwal, CEO of MoneyplantFX']");
+  const img = page.locator("img[alt='Portrait of Harsh Agarwal, CEO of MoneyplantFX']");
   await expect(img).toBeVisible();
 });
 

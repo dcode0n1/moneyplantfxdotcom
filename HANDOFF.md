@@ -9,7 +9,7 @@
 
 - **Harsh Agarwal** — CEO of MoneyplantFX
   - Dedicated Route: `/ceo` (also default `/`)
-  - Profile Image: MoneyplantFX Company Logo (`public/MoneyplantFX/android-chrome-512x512.png`)
+  - Profile Image: Harsh Agarwal portrait (`public/img/harsh-agarwal.png`)
   - vCard: `/harsh-agarwal.vcf` (`Harsh-Agarwal-MoneyplantFX.vcf`)
   - Title: CEO @ MoneyplantFX
 
